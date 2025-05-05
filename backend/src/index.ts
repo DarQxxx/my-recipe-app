@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
+import recipe from "./routes/recipe";
 
 dotenv.config();
 const app = express();
@@ -12,9 +13,18 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Use routes from recipe.ts
+app.use("/recipe", recipe);
+
+// GET /
+// Fetch all recipes
 app.get("/", async (req, res) => {
-  const recipes = await prisma.recipe.findMany();
-  res.json(recipes);
+  try {
+    const recipes = await prisma.recipe.findMany();
+    res.status(200).json(recipes);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch recipes" });
+  }
 });
 
 app.listen(PORT, () =>
