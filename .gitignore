@@ -1,0 +1,19 @@
+# Node.js
+node_modules/
+.env
+dist/
+
+# Expo
+.expo/
+.expo-shared/
+*.expo
+
+# Prisma
+backend/prisma/dev.db
+backend/prisma/migrations/
+
+# macOS / system
+.DS_Store
+
+# Docker
+db-data/
