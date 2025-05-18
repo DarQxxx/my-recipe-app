@@ -6,14 +6,14 @@ import RecipeElement from "../components/recipeElement/RecipeElement";
 import { RecipeProps } from "../types/RecipeProps";
 
 const fetchData = async () => {
-  const response = await fetch(`http://${process.env.EXPO_PUBLIC_API_URL}/`);
+  const response = await fetch(`http://${process.env.EXPO_PUBLIC_API_URL}/`); // Adres API
   if (!response.ok) {
     throw new Error("Error fetching data");
   }
-  return response.json();
+  return response.json(); // Zwróć odpowiedź jako JSON
 };
 
-const Index = () => {
+const AddRecipe = () => {
   const { data, error, isLoading, isError } = useQuery({
     queryKey: ["recipes"],
     queryFn: fetchData,
@@ -32,22 +32,9 @@ const Index = () => {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView>
-        <ScrollView
-          contentContainerStyle={{
-            height: "100%",
-            overflow: "visible",
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-        >
-          {data.map((recipe: RecipeProps) => (
-            <RecipeElement key={recipe.id} {...recipe} />
-          ))}
-        </ScrollView>
-      </SafeAreaView>
+      <SafeAreaView></SafeAreaView>
     </SafeAreaProvider>
   );
 };
 
-export default Index;
+export default AddRecipe;
