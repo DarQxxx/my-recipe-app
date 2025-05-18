@@ -4,6 +4,8 @@ import {
   createRecipe,
   getAllRecipes,
   getRecipe,
+  modifyRecipe,
+  removeRecipe,
 } from "../controllers/recipesController";
 
 const router = express.Router();
@@ -19,5 +21,13 @@ router.post("/", authenticate, createRecipe);
 // GET /recipes/:id
 // Fetch a single recipe by ID
 router.get("/:id", authenticate, getRecipe);
+
+// PUT /recipes/:id
+// Modify a recipe
+router.put("/:id", authenticate, modifyRecipe);
+
+// DELETE /recipes/:id
+// Delete a recipe
+router.delete("/:id", authenticate, removeRecipe);
 
 export default router;

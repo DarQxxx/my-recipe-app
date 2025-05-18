@@ -1,17 +1,21 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { PrismaClient } from "@prisma/client";
 import recipes from "./routes/recipes";
 import register from "./routes/auth/register";
 import login from "./routes/auth/login";
 
 dotenv.config();
 const app = express();
-const prisma = new PrismaClient();
+const helmet = require("helmet");
+const PORT = process.env.PORT!;
 
-const PORT = process.env.PORT || 3000;
-
+app.set("trust proxy", true);
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(cors());
 app.use(express.json());
 

@@ -27,7 +27,7 @@ export const registerUser = async (req: Request, res: Response) => {
       expiresIn: "7d",
     });
 
-    res.status(201).json({ token, email: newUser.email });
+    res.status(201).json({ token, email: newUser.email, id: newUser.id });
   } catch (error) {
     res.status(500).json({ error: "Błąd przy tworzeniu użytkownika" });
   }
@@ -49,7 +49,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
     const token = generateToken(user.id);
 
-    res.status(200).json({ token, email: user.email });
+    res.status(200).json({ token, email: user.email, id: user.id });
   } catch (error) {
     res.status(500).json({ error: "Błąd przy logowaniu użytkownika" });
   }

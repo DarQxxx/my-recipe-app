@@ -15,6 +15,7 @@ export const authenticate = (
   try {
     const token = auth.split(" ")[1];
     const decoded = verifyToken(token);
+
     req.userId = decoded.userId;
     next();
   } catch (err) {
