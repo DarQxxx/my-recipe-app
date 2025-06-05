@@ -34,7 +34,7 @@ export const getRecipe = async (req: Request, res: Response) => {
 
 export const createRecipe = async (req: Request, res: Response) => {
   try {
-    const { name, steps, tags, imageUrl } = req.body;
+    const { name, steps, tags, description, ingredients, imageUrl } = req.body;
     const userId = Number(req.userId);
     if (!userId) return res.status(401).json({ error: "Problem autoryzacji" });
     if (!name || !steps) {
@@ -44,6 +44,8 @@ export const createRecipe = async (req: Request, res: Response) => {
       data: {
         name,
         steps,
+        description,
+        ingredients,
         tags,
         imageUrl,
         userId,
@@ -59,7 +61,7 @@ export const createRecipe = async (req: Request, res: Response) => {
 export const modifyRecipe = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const { name, steps, tags, imageUrl } = req.body;
+    const { name, steps, tags, description, ingredients, imageUrl } = req.body;
     if (!name || !steps) {
       return res.status(400).json({ error: "Wszystkie pola są wymagane" });
     }
@@ -72,6 +74,8 @@ export const modifyRecipe = async (req: Request, res: Response) => {
       data: {
         name,
         steps,
+        description,
+        ingredients,
         tags,
         imageUrl,
         userId,

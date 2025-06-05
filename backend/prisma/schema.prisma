@@ -16,8 +16,10 @@ datasource db {
 model Recipe {
   id        Int      @id @default(autoincrement())
   name      String
-  steps     String[] // JSON array
-  tags      String[]
+  description String
+  ingredients String[]
+  steps     String[]
+  tags  String[]
   imageUrl  String?
   createdAt DateTime @default(now())
   userId    Int
